@@ -105,6 +105,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Detection\Abstraction\Superpixels\SEEDS.cpp" />
+    <ClCompile Include="Detection\Abstraction\Superpixels\SLIC.cpp" />
+    <ClCompile Include="Detection\Detector.cpp" />
     <ClCompile Include="Utils\ImageTools.cpp" />
     <ClCompile Include="Utils\ImageViewer.cpp" />
     <QtRcc Include="MainWindow.qrc" />
@@ -114,6 +117,10 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Detection\Abstraction\Superpixels\SEEDS.h" />
+    <ClInclude Include="Detection\Abstraction\Superpixels\SLIC.h" />
+    <ClInclude Include="Detection\Abstraction\Superpixels\Superpixels.h" />
+    <ClInclude Include="Detection\Detector.h" />
     <ClInclude Include="Utils\ImageTools.h" />
     <ClInclude Include="Utils\ImageViewer.h" />
   </ItemGroup>
