@@ -61,21 +61,21 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Tools\opencv\install\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\IntelSWTools\system_studio_2020\OpenCL\sdk\include;C:\Tools\opencv\install\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>C:\Tools\opencv\install\x64\vc16\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opencv_aruco453d.lib;opencv_barcode453d.lib;opencv_bgsegm453d.lib;opencv_bioinspired453d.lib;opencv_calib3d453d.lib;opencv_ccalib453d.lib;opencv_core453d.lib;opencv_datasets453d.lib;opencv_dnn_objdetect453d.lib;opencv_dnn_superres453d.lib;opencv_dnn453d.lib;opencv_dpm453d.lib;opencv_face453d.lib;opencv_features2d453d.lib;opencv_flann453d.lib;opencv_gapi453d.lib;opencv_fuzzy453d.lib;opencv_hfs453d.lib;opencv_highgui453d.lib;opencv_img_hash453d.lib;opencv_imgcodecs453d.lib;opencv_imgproc453d.lib;opencv_intensity_transform453d.lib;opencv_line_descriptor453d.lib;opencv_mcc453d.lib;opencv_ml453d.lib;opencv_objdetect453d.lib;opencv_optflow453d.lib;opencv_phase_unwrapping453d.lib;opencv_photo453d.lib;opencv_plot453d.lib;opencv_quality453d.lib;opencv_rapid453d.lib;opencv_reg453d.lib;opencv_rgbd453d.lib;opencv_saliency453d.lib;opencv_shape453d.lib;opencv_stereo453d.lib;opencv_stitching453d.lib;opencv_structured_light453d.lib;opencv_superres453d.lib;opencv_surface_matching453d.lib;opencv_text453d.lib;opencv_tracking453d.lib;opencv_video453d.lib;opencv_videoio453d.lib;opencv_videostab453d.lib;opencv_wechat_qrcode453d.lib;opencv_xfeatures2d453d.lib;opencv_ximgproc453d.lib;opencv_xobjdetect453d.lib;opencv_xphoto453d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(INTELOCLSDKROOT)lib\x64;C:\Tools\opencv\install\x64\vc16\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies);OpenCL.lib;opencv_aruco453d.lib;opencv_barcode453d.lib;opencv_bgsegm453d.lib;opencv_bioinspired453d.lib;opencv_calib3d453d.lib;opencv_ccalib453d.lib;opencv_core453d.lib;opencv_datasets453d.lib;opencv_dnn_objdetect453d.lib;opencv_dnn_superres453d.lib;opencv_dnn453d.lib;opencv_dpm453d.lib;opencv_face453d.lib;opencv_features2d453d.lib;opencv_flann453d.lib;opencv_gapi453d.lib;opencv_fuzzy453d.lib;opencv_hfs453d.lib;opencv_highgui453d.lib;opencv_img_hash453d.lib;opencv_imgcodecs453d.lib;opencv_imgproc453d.lib;opencv_intensity_transform453d.lib;opencv_line_descriptor453d.lib;opencv_mcc453d.lib;opencv_ml453d.lib;opencv_objdetect453d.lib;opencv_optflow453d.lib;opencv_phase_unwrapping453d.lib;opencv_photo453d.lib;opencv_plot453d.lib;opencv_quality453d.lib;opencv_rapid453d.lib;opencv_reg453d.lib;opencv_rgbd453d.lib;opencv_saliency453d.lib;opencv_shape453d.lib;opencv_stereo453d.lib;opencv_stitching453d.lib;opencv_structured_light453d.lib;opencv_superres453d.lib;opencv_surface_matching453d.lib;opencv_text453d.lib;opencv_tracking453d.lib;opencv_video453d.lib;opencv_videoio453d.lib;opencv_videostab453d.lib;opencv_wechat_qrcode453d.lib;opencv_xfeatures2d453d.lib;opencv_ximgproc453d.lib;opencv_xobjdetect453d.lib;opencv_xphoto453d.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Tools\opencv\install\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\IntelSWTools\system_studio_2020\OpenCL\sdk\include;C:\Tools\opencv\install\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>C:\Tools\opencv\install\x64\vc16\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opencv_aruco453d.lib;opencv_barcode453d.lib;opencv_bgsegm453d.lib;opencv_bioinspired453d.lib;opencv_calib3d453d.lib;opencv_ccalib453d.lib;opencv_core453d.lib;opencv_datasets453d.lib;opencv_dnn_objdetect453d.lib;opencv_dnn_superres453d.lib;opencv_dnn453d.lib;opencv_dpm453d.lib;opencv_face453d.lib;opencv_features2d453d.lib;opencv_flann453d.lib;opencv_gapi453d.lib;opencv_fuzzy453d.lib;opencv_hfs453d.lib;opencv_highgui453d.lib;opencv_img_hash453d.lib;opencv_imgcodecs453d.lib;opencv_imgproc453d.lib;opencv_intensity_transform453d.lib;opencv_line_descriptor453d.lib;opencv_mcc453d.lib;opencv_ml453d.lib;opencv_objdetect453d.lib;opencv_optflow453d.lib;opencv_phase_unwrapping453d.lib;opencv_photo453d.lib;opencv_plot453d.lib;opencv_quality453d.lib;opencv_rapid453d.lib;opencv_reg453d.lib;opencv_rgbd453d.lib;opencv_saliency453d.lib;opencv_shape453d.lib;opencv_stereo453d.lib;opencv_stitching453d.lib;opencv_structured_light453d.lib;opencv_superres453d.lib;opencv_surface_matching453d.lib;opencv_text453d.lib;opencv_tracking453d.lib;opencv_video453d.lib;opencv_videoio453d.lib;opencv_videostab453d.lib;opencv_wechat_qrcode453d.lib;opencv_xfeatures2d453d.lib;opencv_ximgproc453d.lib;opencv_xobjdetect453d.lib;opencv_xphoto453d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(INTELOCLSDKROOT)lib\x64;C:\Tools\opencv\install\x64\vc16\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies);OpenCL.lib;opencv_aruco453d.lib;opencv_barcode453d.lib;opencv_bgsegm453d.lib;opencv_bioinspired453d.lib;opencv_calib3d453d.lib;opencv_ccalib453d.lib;opencv_core453d.lib;opencv_datasets453d.lib;opencv_dnn_objdetect453d.lib;opencv_dnn_superres453d.lib;opencv_dnn453d.lib;opencv_dpm453d.lib;opencv_face453d.lib;opencv_features2d453d.lib;opencv_flann453d.lib;opencv_gapi453d.lib;opencv_fuzzy453d.lib;opencv_hfs453d.lib;opencv_highgui453d.lib;opencv_img_hash453d.lib;opencv_imgcodecs453d.lib;opencv_imgproc453d.lib;opencv_intensity_transform453d.lib;opencv_line_descriptor453d.lib;opencv_mcc453d.lib;opencv_ml453d.lib;opencv_objdetect453d.lib;opencv_optflow453d.lib;opencv_phase_unwrapping453d.lib;opencv_photo453d.lib;opencv_plot453d.lib;opencv_quality453d.lib;opencv_rapid453d.lib;opencv_reg453d.lib;opencv_rgbd453d.lib;opencv_saliency453d.lib;opencv_shape453d.lib;opencv_stereo453d.lib;opencv_stitching453d.lib;opencv_structured_light453d.lib;opencv_superres453d.lib;opencv_surface_matching453d.lib;opencv_text453d.lib;opencv_tracking453d.lib;opencv_video453d.lib;opencv_videoio453d.lib;opencv_videostab453d.lib;opencv_wechat_qrcode453d.lib;opencv_xfeatures2d453d.lib;opencv_ximgproc453d.lib;opencv_xobjdetect453d.lib;opencv_xphoto453d.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
@@ -105,9 +105,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Detection\Abstraction\Superpixels\SEEDS.cpp" />
     <ClCompile Include="Detection\Abstraction\Superpixels\SLIC.cpp" />
+    <ClCompile Include="Detection\Abstraction\Superpixels\SEEDS.cpp" />
+    <ClCompile Include="Detection\Abstraction\Superpixels\SLICO.cpp" />
     <ClCompile Include="Detection\Detector.cpp" />
+    <ClCompile Include="Detection\Image.cpp" />
+    <ClCompile Include="Detection\opencl.cpp" />
     <ClCompile Include="Utils\ImageTools.cpp" />
     <ClCompile Include="Utils\ImageViewer.cpp" />
     <QtRcc Include="MainWindow.qrc" />
@@ -117,12 +120,20 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Detection\Abstraction\Superpixels\SEEDS.h" />
     <ClInclude Include="Detection\Abstraction\Superpixels\SLIC.h" />
+    <ClInclude Include="Detection\Abstraction\Superpixels\SEEDS.h" />
+    <ClInclude Include="Detection\Abstraction\Superpixels\SLICO.h" />
     <ClInclude Include="Detection\Abstraction\Superpixels\Superpixels.h" />
     <ClInclude Include="Detection\Detector.h" />
+    <ClInclude Include="Detection\Image.h" />
+    <ClInclude Include="Detection\opencl.h" />
+    <ClInclude Include="Detection\Saliency\Salient.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Utils\ImageTools.h" />
     <ClInclude Include="Utils\ImageViewer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ThesisProject.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

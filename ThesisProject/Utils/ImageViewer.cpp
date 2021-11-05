@@ -18,6 +18,8 @@
 #include <QStandardPaths>
 #include <QStatusBar>  
 
+#include "ImageTools.h"
+
 bool VideoSegmentationUtils::ImageViewer::isLoaded()
 {
     return m_loaded;
@@ -52,6 +54,11 @@ std::string VideoSegmentationUtils::ImageViewer::getFileName()
 std::string VideoSegmentationUtils::ImageViewer::getFileDir()
 {
     return m_fileDir;
+}
+
+void VideoSegmentationUtils::ImageViewer::loadFromMat(cv::Mat& img)
+{
+    setImage(VideoSegmentationUtils::Mat2QPixmap(img).toImage());
 }
 
 void VideoSegmentationUtils::ImageViewer::setImage(const QImage& newImage)

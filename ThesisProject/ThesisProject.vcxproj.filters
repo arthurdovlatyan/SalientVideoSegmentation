@@ -46,13 +46,22 @@
     <ClCompile Include="Utils\ImageViewer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Detection\Abstraction\Superpixels\SLIC.cpp">
+    <ClCompile Include="Detection\Abstraction\Superpixels\SLICO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Detection\Detector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Detection\Abstraction\Superpixels\SEEDS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Detection\Abstraction\Superpixels\SLIC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Detection\opencl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Detection\Image.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -63,7 +72,7 @@
     <ClInclude Include="Utils\ImageViewer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Detection\Abstraction\Superpixels\SLIC.h">
+    <ClInclude Include="Detection\Abstraction\Superpixels\SLICO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Detection\Abstraction\Superpixels\Superpixels.h">
@@ -75,5 +84,25 @@
     <ClInclude Include="Detection\Abstraction\Superpixels\SEEDS.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Detection\Abstraction\Superpixels\SLIC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Detection\Saliency\Salient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Detection\opencl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Detection\Image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ThesisProject.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

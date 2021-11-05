@@ -16,8 +16,13 @@ void MainWindow::initialize()
 {
     m_orig_image.initialize(ui.label_orig_image);
     m_image.initialize(ui.label_image);
+
     connect(ui.pushButton_load_image, SIGNAL(clicked()), this, SLOT(on_push_button_clicked_load_image()));
     connect(ui.pushButton_undo, SIGNAL(clicked()), this, SLOT(on_push_button_clicked_undo()));
+
+    connect(ui.pushButton_image_apply_Superpixels, SIGNAL(clicked()), this, SLOT(on_push_button_clicked_applySegmentation()));
+    connect(ui.pushButton_image_color_superpixels, SIGNAL(clicked()), this, SLOT(on_push_button_clicked_colorSegments()));
+    connect(ui.pushButton_image_ComputeUniqueness, SIGNAL(clicked()), this, SLOT(on_push_button_clicked_computeUniqueness()));
 }
 
 void MainWindow::on_push_button_clicked_undo()
@@ -36,6 +41,38 @@ void MainWindow::on_push_button_clicked_undo()
     }
 }
 
+void MainWindow::on_push_button_clicked_applySegmentation()
+{
+    if (ui.comboBox_image_superpixel_variant->currentIndex() == 0)
+    {
+        m_detector.applySLIC();
+    }
+    
+    
+    m_current_image = m_detector.getResult().m_result;
+    m_image.loadFromMat(m_current_image);
+}
+
+void MainWindow::on_push_button_clicked_colorSegments()
+{
+    m_current_image = m_detector.colorSupepixels();
+    m_image.loadFromMat(m_current_image);
+}
+
+void MainWindow::on_push_button_clicked_computeUniqueness()
+{
+    m_current_image = m_detector.applySaliency();
+    m_image.loadFromMat(m_current_image);
+}
+
+void MainWindow::showSegmentationResult()
+{
+    SalientDetector::SuperpixelAlgorithmResult a = m_detector.getResult();
+    cv::imshow("mask", a.m_mask);
+    cv::imshow("labels", a.m_labels);
+    cv::imshow("result", a.m_result);
+}
+
 void MainWindow::loadImageFromPath(const QString& path)
 {
     
@@ -46,7 +83,12 @@ void MainWindow::loadImageFromPath(const QString& path)
     m_current_image = cv::imread(path.toStdString());
     m_orig_image.loadFile(path);
     m_image.loadFile(path);
-    
+    m_detector.setMainImage(m_current_image);
+}
+
+void MainWindow::loadImage2_label_image(cv::Mat& img)
+{
+    m_image.loadFromMat(img);
 }
 
 void MainWindow::on_push_button_clicked_load_image()
@@ -67,4 +109,6 @@ void MainWindow::on_push_button_clicked_load_image()
     }
     m_currentImagePath = filename;
     
+    ui.label_imge_width->setText(QString::number(m_current_image.size().width));
+    ui.label_image_height->setText(QString::number(m_current_image.size().height));
 }

@@ -1,49 +1,72 @@
-#pragma once 
+#pragma once
+
+#include <opencv2/highgui.hpp>
+#include <opencv2/imgproc.hpp>
+#include <opencv2/core.hpp>
+
+#include <math.h>
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <map>
+
 
 #include "Superpixels.h"
 
-#include <opencv2/opencv.hpp>
-#include <vector>
+#define DEFAULT_M 20
+#define USE_DEFAULT_S -1
 
-
-#include <opencv2/imgproc.hpp>
-#include <opencv2/highgui.hpp>
-#include <opencv2/imgcodecs.hpp>
-#include <opencv2/core/utility.hpp>
-
-#include <opencv2/ximgproc.hpp>
-
-#include <ctype.h>
-#include <stdio.h>
-#include <iostream>
 
 namespace Superpixels
 {
-	
-class SLIC : public SuperpixelAlgorithm
-{
-private:
-	cv::Mat m_image;
 
-	int m_region_size;
-	int m_ruler;
-	int m_min_element_size;
-	int m_num_iterations;
+class SLIC : public SuperpixelAlgorithm {
 
-	cv::Mat m_result;
-	cv::Mat m_mask;
-	cv::Mat m_labels;
-	int m_number_of_superpixels;
 public:
-	SLIC(cv::Mat img, int region_size, int ruler, int min_element_size, int num_iterations);
+    SLIC(cv::Mat& img, float m = DEFAULT_M, float S = USE_DEFAULT_S); // calculates the superpixel boundaries on construction
 
-	// Inherited via SuperpixelAlgorithm
-	virtual void calculateSuperpixels() override;
+    cv::Mat viewSuperpixels() const; // returns image displaying superpixel boundaries
+    cv::Mat colorSuperpixels() const; // recolors image with average color in each cluster
+    // map<int, Point>  getCentersMap(); // returns the labels and their cluster centers
+    std::vector<cv::Point> getCenters(); // centers indexed by label
+    cv::Mat getLabels() const override; // per pixel label
 
-	// getters
-	cv::Mat getResult() const override;
-	cv::Mat getMask() const override;
-	cv::Mat getLabels() const override;
-	int getNumber_of_superpixels() const override;
+    cv::Mat getResult() const
+    {
+        cv::Mat res = viewSuperpixels();
+        return res;
+    }
+    cv::Mat getMask() const
+    {
+        return cv::Mat();
+    }
+    int getNumber_of_superpixels() const
+    {
+        return centers.size();
+    }
+
+
+    void calculateSuperpixels() override;
+protected:
+    cv::Mat img; // original image
+    cv::Mat img_f; // scaled to [0,1]
+    cv::Mat img_lab; // converted to LAB colorspace
+
+    // used to store the calculated results
+    cv::Mat show;
+    cv::Mat labels;
+
+    float m; // compactness parameter
+    float S; // window size
+
+    int nx, ny; // cols and rows
+    float dx, dy; // steps
+
+    std::vector<cv::Point> centers; // superpixel centers
+
+    
+    float dist(cv::Point p1, cv::Point p2); // 5-D distance between pixels in LAB space
+
+    const static cv::Mat sobel;
 };
 }

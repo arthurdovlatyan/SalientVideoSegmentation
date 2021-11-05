@@ -6,6 +6,10 @@
 #include <qlabel.h>
 #include <qscrollarea.h>
 
+#include <opencv2/opencv.hpp>
+
+
+
 namespace VideoSegmentationUtils
 {
 
@@ -33,6 +37,8 @@ public:
     QImage getImage();
     std::string getFileName();
     std::string getFileDir();
+
+    void loadFromMat(cv::Mat& img);
 
     //functionality
     /*void zoomIn();

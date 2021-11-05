@@ -49,7 +49,7 @@
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
-      <string>Tab 1</string>
+      <string>Image</string>
      </attribute>
      <widget class="QPushButton" name="pushButton_load_image">
       <property name="geometry">
@@ -205,307 +205,6 @@
        <string>Undo</string>
       </property>
      </widget>
-     <widget class="QTabWidget" name="tabWidget_image_tools">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>30</y>
-        <width>331</width>
-        <height>211</height>
-       </rect>
-      </property>
-      <property name="currentIndex">
-       <number>0</number>
-      </property>
-      <widget class="QWidget" name="tab_image_abstraction">
-       <attribute name="title">
-        <string>Abstraction</string>
-       </attribute>
-       <widget class="QTabWidget" name="tabWidget_image_superpixel">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>321</width>
-          <height>120</height>
-         </rect>
-        </property>
-        <property name="currentIndex">
-         <number>1</number>
-        </property>
-        <widget class="QWidget" name="tab_image_slic">
-         <attribute name="title">
-          <string>SLIC</string>
-         </attribute>
-         <layout class="QFormLayout" name="formLayout_2">
-          <item row="0" column="0" colspan="2">
-           <widget class="QScrollArea" name="scrollArea">
-            <property name="verticalScrollBarPolicy">
-             <enum>Qt::ScrollBarAlwaysOn</enum>
-            </property>
-            <property name="widgetResizable">
-             <bool>true</bool>
-            </property>
-            <widget class="QWidget" name="scrollAreaWidgetContents_2">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>-35</y>
-               <width>278</width>
-               <height>106</height>
-              </rect>
-             </property>
-             <layout class="QFormLayout" name="formLayout_3">
-              <item row="0" column="0">
-               <widget class="QLabel" name="label_slic_region_size">
-                <property name="autoFillBackground">
-                 <bool>true</bool>
-                </property>
-                <property name="frameShape">
-                 <enum>QFrame::NoFrame</enum>
-                </property>
-                <property name="text">
-                 <string>Region Size</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QSlider" name="horizontalSlider_slic_region_size">
-                <property name="autoFillBackground">
-                 <bool>true</bool>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="label_slic_ruler">
-                <property name="autoFillBackground">
-                 <bool>true</bool>
-                </property>
-                <property name="frameShape">
-                 <enum>QFrame::NoFrame</enum>
-                </property>
-                <property name="text">
-                 <string>Ruler</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QSlider" name="horizontalSlider_slic_ruler">
-                <property name="autoFillBackground">
-                 <bool>true</bool>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="1">
-               <widget class="QSlider" name="horizontalSlider_slic_min_element_size">
-                <property name="autoFillBackground">
-                 <bool>true</bool>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="0">
-               <widget class="QLabel" name="label_slic_min_element_size">
-                <property name="autoFillBackground">
-                 <bool>true</bool>
-                </property>
-                <property name="frameShape">
-                 <enum>QFrame::NoFrame</enum>
-                </property>
-                <property name="text">
-                 <string>Min size</string>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="0">
-               <widget class="QLabel" name="label_slic_num_of_iterations">
-                <property name="autoFillBackground">
-                 <bool>true</bool>
-                </property>
-                <property name="frameShape">
-                 <enum>QFrame::NoFrame</enum>
-                </property>
-                <property name="text">
-                 <string>Num of It</string>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="1">
-               <widget class="QSlider" name="horizontalSlider_slic_min_element_size_2">
-                <property name="autoFillBackground">
-                 <bool>true</bool>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="tab_image_seeds">
-         <attribute name="title">
-          <string>SEEDS</string>
-         </attribute>
-         <layout class="QVBoxLayout" name="verticalLayout">
-          <item>
-           <widget class="QScrollArea" name="scrollArea_image_seeds">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>72</height>
-             </size>
-            </property>
-            <property name="focusPolicy">
-             <enum>Qt::WheelFocus</enum>
-            </property>
-            <property name="verticalScrollBarPolicy">
-             <enum>Qt::ScrollBarAlwaysOn</enum>
-            </property>
-            <property name="horizontalScrollBarPolicy">
-             <enum>Qt::ScrollBarAlwaysOff</enum>
-            </property>
-            <property name="widgetResizable">
-             <bool>true</bool>
-            </property>
-            <widget class="QWidget" name="scrollAreaWidgetContents">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>0</y>
-               <width>278</width>
-               <height>154</height>
-              </rect>
-             </property>
-             <layout class="QFormLayout" name="formLayout">
-              <item row="0" column="0">
-               <widget class="QLabel" name="label_image_seeds_it_number">
-                <property name="autoFillBackground">
-                 <bool>true</bool>
-                </property>
-                <property name="text">
-                 <string>It number</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QSlider" name="horizontalSlider">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="label_image_seeds_prior">
-                <property name="text">
-                 <string>Prior</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QSlider" name="horizontalSlider_3">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="label_image_seeds_num_of_superpixels">
-                <property name="text">
-                 <string># of sPixels</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="1">
-               <widget class="QSlider" name="horizontalSlider_4">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="0">
-               <widget class="QLabel" name="label_image_seeds_number_of_lvls">
-                <property name="text">
-                 <string># of Lvls</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="1">
-               <widget class="QSlider" name="horizontalSlider_5">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-              <item row="5" column="0">
-               <widget class="QLabel" name="label_img_seeds_number_of_hist_bins">
-                <property name="text">
-                 <string># of hist bins</string>
-                </property>
-               </widget>
-              </item>
-              <item row="5" column="1">
-               <widget class="QSlider" name="horizontalSlider_6">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-              <item row="6" column="1">
-               <widget class="QCheckBox" name="checkBox_image_seeds_double_step">
-                <property name="text">
-                 <string>Double Step</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </widget>
-       <widget class="QPushButton" name="pushButton_image_apply_Superpixels">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>140</y>
-          <width>101</width>
-          <height>24</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Apply Superpixels</string>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="tab_image_uniqueness">
-       <attribute name="title">
-        <string>Uniqueness</string>
-       </attribute>
-      </widget>
-      <widget class="QWidget" name="tab_image_distribution">
-       <attribute name="title">
-        <string>Distribution</string>
-       </attribute>
-      </widget>
-      <widget class="QWidget" name="tab_image_saliency">
-       <attribute name="title">
-        <string>Saliency</string>
-       </attribute>
-      </widget>
-     </widget>
      <widget class="QFrame" name="frame_image_resolution">
       <property name="geometry">
        <rect>
@@ -592,25 +291,119 @@
        </property>
       </widget>
      </widget>
+     <widget class="QPushButton" name="pushButton_image_undo_step">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>250</y>
+        <width>31</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normalon>:/MainWindow/icons/undo.png</normalon>
+       </iconset>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_image_apply_Superpixels">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>40</y>
+        <width>101</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Apply Superpixels</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_image_color_superpixels">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>40</y>
+        <width>101</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Color Superpixels</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBox_image_superpixel_variant">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>40</y>
+        <width>68</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <item>
+       <property name="text">
+        <string>SLIC</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QPushButton" name="pushButton_image_ComputeUniqueness">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>80</y>
+        <width>141</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>ComputeUniqueness</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_image_computeDistribution">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>80</y>
+        <width>141</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>ComputeDistribution</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_ComputeSaliency">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>130</y>
+        <width>141</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>ComputeSaliency</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
-      <string>Tab 2</string>
+      <string>Video</string>
      </attribute>
     </widget>
-   </widget>
-   <widget class="QSlider" name="horizontalSlider_2">
-    <property name="geometry">
-     <rect>
-      <x>580</x>
-      <y>600</y>
-      <width>205</width>
-      <height>15</height>
-     </rect>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">

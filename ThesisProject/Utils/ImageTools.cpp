@@ -1,7 +1,6 @@
 ﻿#include "ImageTools.h"
 #include <QPixmap>
 
-
 using namespace std;
 using namespace cv;
 

@@ -1,4 +1,4 @@
-#pragma once
+#pragma once 
 
 #include "Superpixels.h"
 
@@ -19,42 +19,38 @@
 
 namespace Superpixels
 {
-
-class SEEDS : public SuperpixelAlgorithm
+	
+class SLICO : public SuperpixelAlgorithm
 {
 private:
 	cv::Mat m_image;
 
+	cv::Mat m_image_scaled;
+	cv::Mat m_image_lab;
+
+	std::vector<cv::Point> centers; // superpixel centers
+
+	int m_region_size;
+	int m_ruler;
+	int m_min_element_size;
 	int m_num_iterations;
-	int m_prior;
-	bool m_double_step;
-	int m_num_superpixels;
-	int m_num_levels;
-	int m_num_histogram_bins;
 
 	cv::Mat m_result;
 	cv::Mat m_mask;
 	cv::Mat m_labels;
-
+	int m_number_of_superpixels;
 public:
-	SEEDS(cv::Mat img, 
-	int num_iterations,
-	int prior,
-	bool double_step,
-	int num_superpixels,
-	int num_levels,
-	int num_histogram_bins);
+	SLICO(cv::Mat img, int region_size, int ruler, int min_element_size, int num_iterations);
 
 	// Inherited via SuperpixelAlgorithm
 	virtual void calculateSuperpixels() override;
 
-	virtual cv::Mat getResult() const override;
+	// getters
+	cv::Mat getResult() const override;
+	cv::Mat getMask() const override;
+	cv::Mat getLabels() const override;
+	int getNumber_of_superpixels() const override;
 
-	virtual cv::Mat getMask() const override;
-
-	virtual cv::Mat getLabels() const override;
-
-	virtual int getNumber_of_superpixels() const override;
 
 	cv::Mat colorSuperpixels() const
 	{
@@ -62,5 +58,4 @@ public:
 	}
 
 };
-
 }
