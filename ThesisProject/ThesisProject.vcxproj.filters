@@ -64,6 +64,15 @@
     <ClCompile Include="Detection\Image.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Detection\gSLIC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MBS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MBSSaliency.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Utils\ImageTools.h">
@@ -97,6 +106,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Detection\Image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Detection\gSlic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MBS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MBSSaliency.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

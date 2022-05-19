@@ -61,7 +61,12 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <LanguageStandard>stdcpp20</LanguageStandard>
+<<<<<<< Updated upstream
       <AdditionalIncludeDirectories>C:\Program Files %28x86%29\IntelSWTools\system_studio_2020\OpenCL\sdk\include;C:\Tools\opencv\install\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+=======
+      <AdditionalIncludeDirectories>$(ProjectDir)/FreeImage;C:\Program Files %28x86%29\IntelSWTools\system_studio_2020\OpenCL\sdk\include;C:\Tools\opencv\install\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+>>>>>>> Stashed changes
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(INTELOCLSDKROOT)lib\x64;C:\Tools\opencv\install\x64\vc16\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -71,7 +76,12 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <LanguageStandard>stdcpp20</LanguageStandard>
+<<<<<<< Updated upstream
       <AdditionalIncludeDirectories>C:\Program Files %28x86%29\IntelSWTools\system_studio_2020\OpenCL\sdk\include;C:\Tools\opencv\install\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+=======
+      <AdditionalIncludeDirectories>$(ProjectDir)/FreeImage;C:\Program Files %28x86%29\IntelSWTools\system_studio_2020\OpenCL\sdk\include;C:\Tools\opencv\install\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+>>>>>>> Stashed changes
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(INTELOCLSDKROOT)lib\x64;C:\Tools\opencv\install\x64\vc16\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -109,8 +119,11 @@
     <ClCompile Include="Detection\Abstraction\Superpixels\SEEDS.cpp" />
     <ClCompile Include="Detection\Abstraction\Superpixels\SLICO.cpp" />
     <ClCompile Include="Detection\Detector.cpp" />
+    <ClCompile Include="Detection\gSLIC.cpp" />
     <ClCompile Include="Detection\Image.cpp" />
     <ClCompile Include="Detection\opencl.cpp" />
+    <ClCompile Include="MBS.cpp" />
+    <ClCompile Include="MBSSaliency.cpp" />
     <ClCompile Include="Utils\ImageTools.cpp" />
     <ClCompile Include="Utils\ImageViewer.cpp" />
     <QtRcc Include="MainWindow.qrc" />
@@ -125,9 +138,12 @@
     <ClInclude Include="Detection\Abstraction\Superpixels\SLICO.h" />
     <ClInclude Include="Detection\Abstraction\Superpixels\Superpixels.h" />
     <ClInclude Include="Detection\Detector.h" />
+    <ClInclude Include="Detection\gSlic.h" />
     <ClInclude Include="Detection\Image.h" />
     <ClInclude Include="Detection\opencl.h" />
     <ClInclude Include="Detection\Saliency\Salient.h" />
+    <ClInclude Include="MBS.h" />
+    <ClInclude Include="MBSSaliency.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Utils\ImageTools.h" />
     <ClInclude Include="Utils\ImageViewer.h" />

@@ -8,8 +8,13 @@
 #include "Abstraction/Superpixels/SLICO.h"
 #include "Abstraction/Superpixels/SEEDS.h"
 #include "Abstraction/Superpixels/SLIC.h"
+<<<<<<< Updated upstream
 
 
+=======
+#include "Image.h"
+#include "../MBS.h"
+>>>>>>> Stashed changes
 #include "opencl.h"
 
 namespace SalientDetector
@@ -56,7 +61,7 @@ public:
         int num_levels,
         int num_histogram_bins);
 
-    void applySLIC();
+    void applySLIC(bool useGPU = false);
 
     SuperpixelAlgorithmResult getResult();
 
@@ -70,7 +75,7 @@ public:
 
 private:
     void saliencyFiltersSP(GPUAcceleration::OpenCL& opencl,
-        const cv::Size& gridSize,
+        const Size& gridSize,
         GPUAcceleration::Memory& clusterCenters,
         GPUAcceleration::Memory& saliencySP,
         float stdDevUniqueness = 0.25,
@@ -78,9 +83,9 @@ private:
         float k = 6.0);
 
     void propagateSaliency(GPUAcceleration::OpenCL& opencl,
-        const cv::Size& imgSize,
+        const Size& imgSize,
         int imgStride,
-        const cv::Size& gridSize,
+        const Size& gridSize,
         GPUAcceleration::Memory& img,
         GPUAcceleration::Memory& clusterAssig,
         GPUAcceleration::Memory& saliencySP,
@@ -89,19 +94,19 @@ private:
         float beta);
 
     static void elementUniqueness(GPUAcceleration::OpenCL& opencl,
-            const cv::Size& gridSize,
+            const Size& gridSize,
             GPUAcceleration::Memory& clusterCenters, 
             GPUAcceleration::Memory& uniqueness,
             float stdDevUniqueness);
 
     static void elementDistribution(GPUAcceleration::OpenCL& opencl,
-            const cv::Size& gridSize,
+            const Size& gridSize,
             GPUAcceleration::Memory& clusterCenters,
             GPUAcceleration::Memory& distribution,
             float stdDevDistribution);
 
     static void elementSaliency(GPUAcceleration::OpenCL& opencl,
-            const cv::Size& gridSize,
+            const Size& gridSize,
             GPUAcceleration::Memory& uniqueness, 
             GPUAcceleration::Memory& distribution,
             GPUAcceleration::Memory& saliency,

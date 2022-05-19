@@ -369,40 +369,61 @@
        </rect>
       </property>
       <property name="text">
-       <string>ComputeUniqueness</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_image_computeDistribution">
-      <property name="geometry">
-       <rect>
-        <x>160</x>
-        <y>80</y>
-        <width>141</width>
-        <height>24</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>ComputeDistribution</string>
+       <string>ComputeSaliency</string>
       </property>
      </widget>
      <widget class="QPushButton" name="pushButton_ComputeSaliency">
       <property name="geometry">
        <rect>
-        <x>80</x>
-        <y>130</y>
-        <width>141</width>
+        <x>10</x>
+        <y>200</y>
+        <width>211</width>
         <height>24</height>
        </rect>
       </property>
       <property name="text">
-       <string>ComputeSaliency</string>
+       <string>AutoComputeSaliencyGPU</string>
       </property>
      </widget>
-    </widget>
-    <widget class="QWidget" name="tab_2">
-     <attribute name="title">
-      <string>Video</string>
-     </attribute>
+     <widget class="QPushButton" name="pushButton_cimputeSaliencyGPU">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>120</y>
+        <width>211</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>ComputeSuperpixelsGPU</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_MBS">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>160</y>
+        <width>75</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>MBS</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_computeWholeDir">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>160</y>
+        <width>121</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>ComputeWholeDir</string>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>

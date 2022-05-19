@@ -1,5 +1,5 @@
 #include "Detector.h"
-
+#include "gSlic.h"
 
 
 SalientDetector::SalientDetector::SalientDetector(cv::Mat img)
@@ -52,14 +52,45 @@ void SalientDetector::SalientDetector::applySEEDS(int num_iterations,
 	setSuperpixelAbstraction();
 }
 
-void SalientDetector::SalientDetector::applySLIC()
+void SalientDetector::SalientDetector::applySLIC(bool useGPU)
 {
-	SLIC = true;
-	m_superpixelAlgorithm = std::make_unique<Superpixels::SLIC>(m_orig_image);
+	if (useGPU == false) {
+		SLIC = true;
+		m_superpixelAlgorithm = std::make_unique<Superpixels::SLIC>(m_orig_image);
 
-	m_superpixelAlgorithm->calculateSuperpixels();
+		m_superpixelAlgorithm->calculateSuperpixels();
 
-	setSuperpixelAbstraction();
+		setSuperpixelAbstraction();
+	}
+	else {
+		cv::imwrite("C:\\Users\\dovla\\tmp.jpg", m_orig_image);
+		Image img("C:\\Users\\dovla\\tmp.jpg");
+		img.writeToFile("C:\\Users\\dovla\\tmp1.jpg");
+		int superPixelSpacing = 5;
+		int nIters = 10;
+		float relWeight = 40;
+
+		bool useGPU = true;
+		GPUAcceleration::OpenCL opencl(useGPU);
+
+		Size spSize = superPixelGridSize(img.size(), superPixelSpacing);
+
+		// 3 dims for color + 2 for x and y
+		GPUAcceleration::Memory clusterCenters(opencl, CL_MEM_READ_WRITE, sizeof(float) * spSize.width * spSize.height * 5);
+		GPUAcceleration::Memory clusterAssig(opencl, CL_MEM_READ_WRITE, sizeof(int) * img.size().width * img.size().height);
+
+		GPUAcceleration::Memory imgRGB(opencl, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, img.stride() * img.size().height, img(0, 0));
+		GPUAcceleration::Memory imgLab(opencl, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, img.stride() * img.size().height, img(0, 0));
+		rgb2lab(opencl, img.size(), img.stride(), imgRGB, imgLab);
+
+		slicSuperPixels(opencl, img.size(), img.stride(), superPixelSpacing, nIters, relWeight, imgLab, clusterCenters, clusterAssig);
+
+		std::vector<int> clusterAssig_(img.size().width * img.size().height);
+		clusterAssig.readBuffer(opencl, clusterAssig_.data());
+		writePgm("C:\\Users\\dovla\\tmp.jpg", clusterAssig_.data(), img.size());
+		Image img1("C:\\Users\\dovla\\tmp.jpg");
+		img1.writeToFile("C:\\Users\\dovla\\tmp3.jpg");
+	}
 }
 
 SalientDetector::SuperpixelAlgorithmResult SalientDetector::SalientDetector::getResult()
@@ -71,7 +102,8 @@ cv::Mat SalientDetector::SalientDetector::colorSupepixels()
 {
 	if (SLIC == true)
 	{
-		return m_superpixelAlgorithm->colorSuperpixels();
+		m_imageColored = m_superpixelAlgorithm->colorSuperpixels();
+		return m_imageColored;
 	}
 
 	int nx = m_orig_image.cols, ny = m_orig_image.rows;
@@ -114,36 +146,58 @@ cv::Mat SalientDetector::SalientDetector::colorSupepixels()
 
 cv::Mat SalientDetector::SalientDetector::applySaliency(bool useGPU)
 {
+
 	GPUAcceleration::OpenCL opencl(useGPU);
+	cv::imwrite("C:\\Users\\dovla\\tmp.jpg", m_orig_image);
 
-	GPUAcceleration::Memory clusterCenters(opencl, CL_MEM_READ_WRITE, sizeof(float) * m_imageColored.size().width * m_imageColored.size().height * 5);
-	GPUAcceleration::Memory saliencySP(opencl, CL_MEM_READ_WRITE, sizeof(float) * m_imageColored.size().width * m_imageColored.size().height);
-	GPUAcceleration::Memory saliency(opencl, CL_MEM_READ_WRITE, sizeof(float) * m_imageColored.size().width * m_imageColored.size().height);
-	GPUAcceleration::Memory clusterAssig(opencl, CL_MEM_READ_WRITE, sizeof(int) * m_imageColored.size().width * m_imageColored.size().height);
+	int superPixelSpacing = 5;
 
-	GPUAcceleration::Memory imgRGB(opencl, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, m_imageColored.size().width * m_imageColored.size().height, &m_imageColored.at<float>(0, 0));
-	/*GPUAcceleration::Memory imgLab(opencl, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, img.stride() * img.size().height, img(0, 0));*/
+	Image img("C:\\Users\\dovla\\tmp.jpg");
+	img.writeToFile("C:\\Users\\dovla\\tmp2.jpg");
+	Size spSize = superPixelGridSize(img.size(), superPixelSpacing);
 
+	GPUAcceleration::Memory clusterCenters(opencl, CL_MEM_READ_WRITE, sizeof(float) * spSize.width * spSize.height * 5);
+	GPUAcceleration::Memory saliencySP(opencl, CL_MEM_READ_WRITE, sizeof(float) * spSize.width * spSize.height);
+	GPUAcceleration::Memory saliency(opencl, CL_MEM_READ_WRITE, sizeof(float) * img.size().width * img.size().height);
+	GPUAcceleration::Memory clusterAssig(opencl, CL_MEM_READ_WRITE, sizeof(int) * img.size().width * img.size().height);
+
+	GPUAcceleration::Memory imgRGB(opencl, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, img.stride() * img.size().height, img(0, 0));
+	GPUAcceleration::Memory imgLab(opencl, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, img.stride() * img.size().height, img(0, 0));
+	 
 	float stdDevUniqueness = 0.25;
 	float stdDevDistribution = 2;
 	int k = 6;
+	float alpha = 0.0333;
+	float beta = 0.0333;
+	int nIters = 10;
+	int relWeight = 40;
 
-	saliencyFiltersSP(opencl, m_imageColored.size(), clusterCenters, saliencySP, stdDevUniqueness, stdDevDistribution, k);
-	//propagateSaliency(opencl, img.size(), img.stride(), spSize, (useLab) ? imgLab : imgRGB, clusterAssig, saliencySP, saliency, alpha, beta);
-	return m_imageColored;
+	rgb2lab(opencl, img.size(), img.stride(), imgRGB, imgLab);
+	slicSuperPixels(opencl, img.size(), img.stride(), superPixelSpacing, nIters, relWeight, imgLab, clusterCenters, clusterAssig);
+	saliencyFiltersSP(opencl, spSize, clusterCenters, saliencySP, stdDevUniqueness, stdDevDistribution, k);
+	propagateSaliency(opencl, img.size(), img.stride(), spSize, imgLab , clusterAssig, saliencySP, saliency, alpha, beta);
+
+	//float saliency_[img.size().width * img.size().height];
+	std::vector<int> sal(img.size().width * img.size().height);
+	saliency.readBuffer(opencl, sal.data());
+	writePgm("C:\\Users\\dovla\\tmp1.jpg", sal.data(), img.size());
+	Image img1("C:\\Users\\dovla\\tmp1.jpg");
+	img1.writeToFile("C:\\Users\\dovla\\tmp.jpg");
+	m_saliency = cv::imread("C:\\Users\\dovla\\tmp.jpg");
+	return m_saliency;
 }
-
-void SalientDetector::SalientDetector::saliencyFiltersSP(GPUAcceleration::OpenCL& opencl, const cv::Size& gridSize, GPUAcceleration::Memory& clusterCenters, GPUAcceleration::Memory& saliencySP, float stdDevUniqueness, float stdDevDistribution, float k)
+ 
+void SalientDetector::SalientDetector::saliencyFiltersSP(GPUAcceleration::OpenCL& opencl, const Size& gridSize, GPUAcceleration::Memory& clusterCenters, GPUAcceleration::Memory& saliencySP, float stdDevUniqueness, float stdDevDistribution, float k)
 {
 	GPUAcceleration::Memory uniqueness(opencl, CL_MEM_READ_WRITE, sizeof(float) * gridSize.width * gridSize.height);
 	GPUAcceleration::Memory distribution(opencl, CL_MEM_READ_WRITE, sizeof(float) * gridSize.width * gridSize.height);
 
 	elementUniqueness(opencl, gridSize, clusterCenters, uniqueness, stdDevUniqueness);
-	//elementDistribution(opencl, gridSize, clusterCenters, distribution, stdDevDistribution);
-	//elementSaliency(opencl, gridSize, uniqueness, distribution, saliencySP, k);
+	elementDistribution(opencl, gridSize, clusterCenters, distribution, stdDevDistribution);
+	elementSaliency(opencl, gridSize, uniqueness, distribution, saliencySP, k);
 }
 
-void SalientDetector::SalientDetector::propagateSaliency(GPUAcceleration::OpenCL& opencl, const cv::Size& imgSize, int imgStride, const cv::Size& gridSize, GPUAcceleration::Memory& img, GPUAcceleration::Memory& clusterAssig, GPUAcceleration::Memory& saliencySP, GPUAcceleration::Memory& saliency, float alpha, float beta)
+void SalientDetector::SalientDetector::propagateSaliency(GPUAcceleration::OpenCL& opencl, const Size& imgSize, int imgStride, const Size& gridSize, GPUAcceleration::Memory& img, GPUAcceleration::Memory& clusterAssig, GPUAcceleration::Memory& saliencySP, GPUAcceleration::Memory& saliency, float alpha, float beta)
 {
 	GPUAcceleration::Kernel kernel(opencl, kernelSources, "propagateSaliency");
 
@@ -169,7 +223,7 @@ void SalientDetector::SalientDetector::propagateSaliency(GPUAcceleration::OpenCL
 	executeKernel(opencl, kernel, tmpSize);
 }
 
-void SalientDetector::SalientDetector::elementUniqueness(GPUAcceleration::OpenCL& opencl, const cv::Size& gridSize, GPUAcceleration::Memory& clusterCenters, GPUAcceleration::Memory& uniqueness, float stdDevUniqueness)
+void SalientDetector::SalientDetector::elementUniqueness(GPUAcceleration::OpenCL& opencl, const Size& gridSize, GPUAcceleration::Memory& clusterCenters, GPUAcceleration::Memory& uniqueness, float stdDevUniqueness)
 {
 	GPUAcceleration::Kernel kernel(opencl, kernelSources, "elementUniqueness");
 
@@ -188,7 +242,7 @@ void SalientDetector::SalientDetector::elementUniqueness(GPUAcceleration::OpenCL
 	executeKernel(opencl,kernel,tmpSize);
 }
 
-void SalientDetector::SalientDetector::elementDistribution(GPUAcceleration::OpenCL& opencl, const cv::Size& gridSize, GPUAcceleration::Memory& clusterCenters, GPUAcceleration::Memory& distribution, float stdDevDistribution)
+void SalientDetector::SalientDetector::elementDistribution(GPUAcceleration::OpenCL& opencl, const Size& gridSize, GPUAcceleration::Memory& clusterCenters, GPUAcceleration::Memory& distribution, float stdDevDistribution)
 {
 	GPUAcceleration::Kernel kernel(opencl, kernelSources, "elementDistribution");
 
@@ -207,7 +261,7 @@ void SalientDetector::SalientDetector::elementDistribution(GPUAcceleration::Open
 	executeKernel(opencl, kernel, tmpSize);
 }
 
-void SalientDetector::SalientDetector::elementSaliency(GPUAcceleration::OpenCL& opencl, const cv::Size& gridSize, GPUAcceleration::Memory& uniqueness, GPUAcceleration::Memory& distribution, GPUAcceleration::Memory& saliency, float k)
+void SalientDetector::SalientDetector::elementSaliency(GPUAcceleration::OpenCL& opencl, const Size& gridSize, GPUAcceleration::Memory& uniqueness, GPUAcceleration::Memory& distribution, GPUAcceleration::Memory& saliency, float k)
 {
 	GPUAcceleration::Kernel kernel(opencl, kernelSources, "elementSaliency");
 
@@ -227,6 +281,7 @@ void SalientDetector::SalientDetector::elementSaliency(GPUAcceleration::OpenCL& 
 
 
 
+<<<<<<< Updated upstream
 
 float eucDist2(float* v1, float* v2, int dim) {                         
    float dist = 0.0;                                                   
@@ -369,6 +424,10 @@ void propagateSaliency(
       saliency[i * imWidth + j] = totalS;                               
    }
 }                                                                    
+=======
+                                                                    
+                                                                        
+>>>>>>> Stashed changes
 
 // GPU CODE
 const char* SalientDetector::SalientDetector::kernelSources =

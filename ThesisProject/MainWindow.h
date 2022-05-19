@@ -27,7 +27,9 @@ public slots:
     void on_push_button_clicked_computeUniqueness();
     //void on_push_button_clicked_computeDistribution();
     void showSegmentationResult();
-
+    void on_push_button_clicked_computeSuperpixelsGPU();
+    void on_push_button_clicked_MBS();
+    void on_push_button_compute_whole_dir();
 protected:
     void loadImageFromPath(const QString& path);
     void loadImage2_label_image(cv::Mat& img);
@@ -40,5 +42,5 @@ private:
     QString m_currentImagePath;
 
     SalientDetector::SalientDetector m_detector;
-    
+    bool m_analyze = true;
 };
